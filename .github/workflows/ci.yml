@@ -6,17 +6,15 @@ on:
       - main
 
 env:
-  APP_NAME: GitHub Actions Demo
-  NODE_VERSION: 20
+  APP_NAME: "GitHub Actions Demo"
+  NODE_VERSION: "20"
 
 jobs:
-
   build:
-
+    name: Build Job
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -24,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Install Dependencies
         run: npm install
@@ -32,14 +30,18 @@ jobs:
       - name: Display App Name
         run: echo "Application Name: $APP_NAME"
 
+      - name: Display Node Version
+        run: node -v
+
+      - name: Display npm Version
+        run: npm -v
+
   test:
-
+    name: Test Job
     needs: build
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -47,10 +49,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: npm
 
       - name: Install Dependencies
         run: npm install
 
       - name: Run Tests
         run: npm test
+
+      - name: Run Application
+        run: npm start
