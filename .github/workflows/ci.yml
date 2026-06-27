@@ -1,11 +1,16 @@
-name: Node.js CI Pipeline
+name: GitHub Actions Level 3
 
 on:
   push:
     branches:
       - main
 
+env:
+  APP_NAME: GitHub Actions Demo
+  NODE_VERSION: 20
+
 jobs:
+
   build:
 
     runs-on: ubuntu-latest
@@ -18,19 +23,34 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
-      - name: Display Node Version
-        run: node -v
+      - name: Install Dependencies
+        run: npm install
 
-      - name: Display npm Version
-        run: npm -v
+      - name: Display App Name
+        run: echo "Application Name: $APP_NAME"
+
+  test:
+
+    needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
       - name: Install Dependencies
         run: npm install
 
       - name: Run Tests
         run: npm test
-
-      - name: Run Application
-        run: npm start
