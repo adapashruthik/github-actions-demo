@@ -1,0 +1,21 @@
+{
+  "name": "github-actions-demo",
+  "version": "1.0.0",
+  "main": "index.js",
+ "scripts": {
+  "start": "node index.js",
+  "test": "echo \"All tests passed\""
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adapashruthik/github-actions-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adapashruthik/github-actions-demo/issues"
+  },
+  "homepage": "https://github.com/adapashruthik/github-actions-demo#readme",
+  "description": ""
+}

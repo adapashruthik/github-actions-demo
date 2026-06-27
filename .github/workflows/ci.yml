@@ -1,4 +1,4 @@
-name: First Workflow
+name: Node.js CI Pipeline
 
 on:
   push:
@@ -6,9 +6,31 @@ on:
       - main
 
 jobs:
-  hello:
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Message
-        run: echo "Hello DevOps!"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Display Node Version
+        run: node -v
+
+      - name: Display npm Version
+        run: npm -v
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Run Application
+        run: npm start
