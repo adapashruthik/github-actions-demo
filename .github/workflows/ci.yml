@@ -7,7 +7,6 @@ on:
 
 env:
   APP_NAME: "GitHub Actions Demo"
-  NODE_VERSION: "20"
 
 jobs:
   build:
@@ -20,20 +19,24 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: "20"
           cache: npm
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
 
       - name: Display App Name
-        run: echo "Application Name: $APP_NAME"
+        run: |
+          echo "Application Name: $APP_NAME"
 
       - name: Display Node Version
-        run: node -v
+        run: |
+          node -v
 
       - name: Display npm Version
-        run: npm -v
+        run: |
+          npm -v
 
   test:
     needs: build
@@ -46,14 +49,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
+          node-version: "20"
           cache: npm
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
 
       - name: Run Tests
-        run: npm test
+        run: |
+          npm test
 
       - name: Run Application
-        run: npm start
+        run: |
+          npm start
